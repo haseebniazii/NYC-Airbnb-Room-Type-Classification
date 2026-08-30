@@ -13,7 +13,7 @@
 
 ---
 
-## 📌 About the Project
+## 📌 About The Project
 
 **NYC Airbnb Room Type Classification** is a Machine Learning classification project that predicts the **room type** of an Airbnb listing in New York City.
 
@@ -23,13 +23,13 @@ The model predicts one of three categories:
 * 🚪 **Private room**
 * 🛏️ **Shared room**
 
-The project follows a complete Machine Learning workflow, starting from data exploration and cleaning to model comparison, hyperparameter tuning, final evaluation, and saving the trained model pipeline.
+The project follows a complete Machine Learning workflow, from data exploration and cleaning to preprocessing, model comparison, cross-validation, hyperparameter tuning, final evaluation, and saving the trained Machine Learning pipeline.
 
 ---
 
 ## 🎯 Project Objective
 
-The main objective is to build a classification model that can predict the `room_type` of an Airbnb listing using features such as:
+The main objective of this project is to build a reliable classification model that can predict the `room_type` of an Airbnb listing using information such as:
 
 * Price
 * Location
@@ -40,23 +40,23 @@ The main objective is to build a classification model that can predict the `room
 * Host listing information
 * Latitude and longitude
 
+The project also focuses on building a reproducible preprocessing and modeling pipeline using Scikit-Learn.
+
 ---
 
 ## 📊 Dataset
 
-The project uses the **New York City Airbnb Open Data** dataset from Kaggle.
+The project uses the **New York City Airbnb Open Data** dataset.
 
-**Dataset:** New York City Airbnb Open Data
+The dataset contains approximately **48,895 Airbnb listings** and **16 columns**.
 
-Dataset contains approximately **48,895 Airbnb listings** and **16 columns**.
-
-Target variable:
+### Target Variable
 
 ```text
 room_type
 ```
 
-Target classes:
+### Target Classes
 
 ```text
 Entire home/apt
@@ -64,13 +64,15 @@ Private room
 Shared room
 ```
 
+The dataset contains both numerical and categorical features, making it suitable for demonstrating real-world Machine Learning preprocessing techniques.
+
 ---
 
 ## 🔎 Exploratory Data Analysis
 
-The project includes detailed EDA to understand the dataset before modeling.
+Exploratory Data Analysis was performed to understand the structure, distributions, relationships, and quality of the dataset.
 
-### EDA performed:
+### EDA Performed
 
 * Dataset shape and structure
 * Data types
@@ -85,56 +87,76 @@ The project includes detailed EDA to understand the dataset before modeling.
 * Outlier inspection
 * Distribution visualization
 
+EDA helped identify important patterns and prepare the dataset for Machine Learning.
+
 ---
 
 ## 🧹 Data Cleaning & Feature Engineering
 
-The dataset was prepared for Machine Learning by:
+Before model training, the dataset was prepared through several preprocessing steps.
+
+### Data Preparation Included
 
 * Handling missing values
 * Removing unnecessary columns
-* Cleaning categorical features
-* Processing numerical features
-* Inspecting skewed variables
+* Cleaning categorical variables
+* Processing numerical variables
+* Inspecting skewed features
 * Handling outliers where appropriate
-* Preparing features for model training
+* Preparing features for Machine Learning
+* Separating features and target variable
+
+The goal was to create clean and consistent input data for the classification models.
 
 ---
 
 ## ⚙️ Machine Learning Pipeline
 
-To keep preprocessing consistent and avoid data leakage, the project uses:
+The project uses **ColumnTransformer** and **Pipeline** from Scikit-Learn to keep preprocessing and model training organized.
 
-```python
+```text
+Raw Data
+   ↓
+Numerical Features ──→ Numerical Preprocessing
+   ↓
+Categorical Features ──→ Categorical Encoding
+   ↓
 ColumnTransformer
-Pipeline
+   ↓
+Machine Learning Model
+   ↓
+Prediction
 ```
 
-The preprocessing pipeline handles numerical and categorical features separately before passing the transformed data to the Machine Learning model.
+Using a complete pipeline ensures that the same preprocessing steps are automatically applied during both training and prediction.
 
-This ensures that the same preprocessing steps are automatically applied during both training and prediction.
+It also helps reduce the risk of **data leakage** and makes the final model easier to reuse.
 
 ---
 
 ## 🤖 Models Compared
 
-Multiple classification algorithms were trained and compared using cross-validation:
+Multiple classification algorithms were trained and compared.
 
 ### 1. Logistic Regression
 
-Used as a simple and interpretable baseline model.
+Used as a baseline classification model.
+
+It provides a simple and interpretable reference point for evaluating more complex algorithms.
 
 ### 2. Decision Tree
 
-A non-linear model capable of learning complex decision boundaries.
+A non-linear classification algorithm capable of learning complex decision boundaries from the data.
 
 ### 3. Random Forest
 
-An ensemble learning algorithm that combines multiple decision trees and is generally strong for tabular classification problems.
+An ensemble learning algorithm that combines multiple decision trees.
+
+Random Forest was used because it performs well on many tabular classification problems and can capture non-linear relationships between features.
 
 ### 4. Gradient Boosting
 
-A sequential ensemble method that builds models to improve upon previous predictions.
+A sequential ensemble learning method that builds models iteratively to improve prediction performance.
 
 ---
 
@@ -142,24 +164,26 @@ A sequential ensemble method that builds models to improve upon previous predict
 
 The candidate models were evaluated using **3-fold Stratified Cross-Validation** on the training data.
 
-Evaluation included metrics such as:
+The following classification metrics were considered:
 
 * Accuracy
 * Precision
 * Recall
 * F1-Score
 
-The models were compared using the same preprocessing pipeline to ensure a fair comparison.
+Using the same preprocessing pipeline for each model provides a fair comparison between the algorithms.
 
 ---
 
 ## 🎯 Hyperparameter Tuning
 
-After comparing the candidate models, the best-performing model was selected for further optimization.
+After comparing the candidate models, the strongest model was selected for further optimization.
 
-Hyperparameter tuning was performed to find better model parameters and improve generalization performance.
+Hyperparameter tuning was performed to identify better model parameters and improve generalization performance.
 
-The final model was then evaluated on the **untouched test set**.
+The final tuned model was then evaluated on the **untouched test set**.
+
+This helps provide a more realistic estimate of how the final model performs on unseen data.
 
 ---
 
@@ -167,17 +191,13 @@ The final model was then evaluated on the **untouched test set**.
 
 Feature importance was analyzed to understand which features contributed most to the model's predictions.
 
-This helps provide better interpretability and insight into the factors associated with Airbnb room types.
+This provides additional insight into the factors associated with Airbnb room types and improves the interpretability of the Machine Learning model.
 
 ---
 
 ## 💾 Model Saving
 
-The final preprocessing + Machine Learning pipeline was saved as a model artifact.
-
-Using a complete pipeline means the saved model can receive raw input and automatically perform the required preprocessing before making a prediction.
-
-Example:
+The final preprocessing and Machine Learning pipeline was saved as a model artifact.
 
 ```python
 import joblib
@@ -185,18 +205,33 @@ import joblib
 joblib.dump(final_pipeline, "airbnb_room_type_model.pkl")
 ```
 
+The saved pipeline contains the preprocessing steps together with the trained Machine Learning model.
+
+This allows new raw input data to be passed through the same preprocessing process before generating predictions.
+
 ---
 
 ## 🛠️ Technologies Used
 
+### Machine Learning
+
 * 🐍 Python
 * 🐼 Pandas
 * 🔢 NumPy
-* 📊 Matplotlib
-* 📈 Seaborn
 * 🤖 Scikit-Learn
 * 💾 Joblib
-* 📓 Jupyter Notebook / Google Colab
+
+### Data Visualization
+
+* 📊 Matplotlib
+* 📈 Seaborn
+
+### Development
+
+* 📓 Jupyter Notebook
+* 💻 Google Colab
+* 🐙 Git
+* 🐙 GitHub
 
 ---
 
@@ -208,7 +243,8 @@ NYC-Airbnb-Room-Type-Classification/
 ├── NYC_Airbnb_Room_Type_Classification.ipynb
 ├── AB_NYC_2019.csv
 ├── airbnb_room_type_model.pkl
-└── README.md
+├── README.md
+└── LICENSE
 ```
 
 ---
@@ -220,7 +256,7 @@ Dataset
    ↓
 Data Understanding
    ↓
-EDA
+Exploratory Data Analysis
    ↓
 Data Cleaning
    ↓
@@ -232,9 +268,11 @@ ColumnTransformer
    ↓
 Pipeline
    ↓
-Multiple Models
+Multiple Classification Models
    ↓
 Cross-Validation
+   ↓
+Model Comparison
    ↓
 Hyperparameter Tuning
    ↓
@@ -247,7 +285,7 @@ Save Model
 
 ---
 
-## 🚀 Key Learning Outcomes
+## 🎓 Key Learning Outcomes
 
 Through this project, I practiced:
 
@@ -255,34 +293,40 @@ Through this project, I practiced:
 * Exploratory Data Analysis
 * Data cleaning
 * Feature engineering
-* Handling numerical and categorical data
+* Numerical preprocessing
+* Categorical encoding
 * `ColumnTransformer`
 * `Pipeline`
 * Classification algorithms
-* Cross-validation
+* Stratified Cross-Validation
 * Hyperparameter tuning
 * Model evaluation
 * Feature importance
-* Saving Machine Learning pipelines with Joblib
+* Model serialization with Joblib
+* Building reproducible Machine Learning pipelines
 
 ---
 
 ## 📌 Conclusion
 
-This project demonstrates a complete Machine Learning workflow for a real-world classification problem using Airbnb listing data from New York City.
+This project demonstrates a complete Machine Learning workflow for a real-world **multi-class classification problem** using New York City Airbnb listing data.
 
-By comparing multiple algorithms and tuning the strongest model, the project focuses not only on building a model but also on creating a reliable and reproducible Machine Learning pipeline.
+By comparing multiple classification algorithms, applying cross-validation, tuning the selected model, and saving the final preprocessing + model pipeline, the project focuses on building a reliable and reproducible Machine Learning solution.
 
 ---
 
 ## 👨‍💻 Author
 
-**Haseeb Khan**
+### Haseeb Khan
 
-Computer Science Student | Machine Learning & AI Enthusiast
+**Computer Science Student | Machine Learning & AI Enthusiast**
 
 GitHub: **haseebniazii**
 
 ---
 
-⭐ If you find this project useful, feel free to explore the notebook and give the repository a star.
+## ⭐ Support
+
+If you found this project useful, feel free to explore the notebook and give the repository a ⭐ star.
+
+**Thank you for checking out the project!**
