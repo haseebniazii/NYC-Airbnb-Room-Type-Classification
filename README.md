@@ -28,16 +28,6 @@ Enter Airbnb listing details and get a prediction for:
 
 The frontend is connected to a deployed FastAPI machine-learning API.
 
-### ⚡ Live FastAPI
-
-👉 **[Open FastAPI](https://nyc-airbnb-room-type-predictor.fastapicloud.dev/)**
-
-### 📚 Interactive API Documentation
-
-👉 **[Open Swagger API Docs](https://nyc-airbnb-room-type-predictor.fastapicloud.dev/docs)**
-
-The API provides a `/predict` endpoint for making room-type predictions.
-
 ---
 
 # 📌 About The Project
